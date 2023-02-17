@@ -13,12 +13,16 @@ func getAbout(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "Hello Wolrd")
+		fmt.Fprintln(w, "Hello World")
 	})
 
 	http.HandleFunc("/about", getAbout)
 
-	var port string = os.Getenv("APP_PORT")
+	var port string = "3000"
+
+	if os.Getenv("PORT") != "" {
+		port = os.Getenv("PORT")
+	}
 
 	fmt.Println("Starting web server at ", port)
 	http.ListenAndServe(":"+port, nil)
